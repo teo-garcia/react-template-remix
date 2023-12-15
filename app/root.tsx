@@ -1,4 +1,4 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
+import resets from "app/lib/resets.css";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -9,9 +9,17 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+const fontStylesheet = [
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: true },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Ubuntu:wght@400;700&display=swap",
+  },
 ];
+
+const resetStylesheet = { rel: "stylesheet", href: resets };
+export const links: LinksFunction = () => [...fontStylesheet, resetStylesheet];
 
 export default function App() {
   return (
